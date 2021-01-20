@@ -21,7 +21,6 @@ jobs:
           yarn
           yarn run ci
           cp .ci.npmrc .npmrc
-          npm whoami
           yarn lerna publish from-package --yes
         env:
           CI: "true"
