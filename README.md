@@ -1,3 +1,3 @@
-### Jest Runtime & Utils
+## Welcome to Effect-TS - Jest
 
-Check tests :)
+Please follow up to: [https://github.com/Effect-TS/jest/tree/master/packages/jest](https://github.com/Effect-TS/jest/tree/master/packages/jest)

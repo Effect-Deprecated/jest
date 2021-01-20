@@ -1,0 +1,6 @@
+{
+  "sideEffects": false,
+  "main": "./index.js",
+  "module": "../esm/Runtime/index.js",
+  "typings": "./index.d.ts"
+}
