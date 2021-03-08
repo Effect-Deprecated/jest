@@ -31,7 +31,8 @@
   },
   "config": {
     "modules": [
-      "Runtime"
+      "Runtime",
+      "Modules"
     ]
   }
 }
