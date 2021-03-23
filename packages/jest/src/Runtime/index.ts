@@ -17,16 +17,34 @@ export interface TestRuntime<R> {
   provide: <R2, E, A>(self: T.Effect<R & R2, E, A>) => T.Effect<R2, E, A>
 }
 
+export function testRuntime(conf?: {
+  open?: number
+  close?: number
+}): TestRuntime<unknown>
 export function testRuntime<R, E>(
   self: L.Layer<T.DefaultEnv, E, R>,
-  {
-    close = 120_000,
-    open = 120_000
-  }: {
+  conf?: {
     open?: number
     close?: number
-  } = {}
+  }
+): TestRuntime<R>
+export function testRuntime<R, E>(
+  self?:
+    | L.Layer<T.DefaultEnv, E, R>
+    | {
+        open?: number
+        close?: number
+      },
+  conf?: {
+    open?: number
+    close?: number
+  }
 ): TestRuntime<R> {
+  const layer = (self && "+++" in self ? self : L.Empty) as L.Layer<T.DefaultEnv, E, R>
+  const config = self && "+++" in self ? conf : self
+  const open = config?.open || 120_000
+  const close = config?.close || 120_000
+
   const promiseEnv = Pr.unsafeMake<never, R>(None)
   const promiseRelMap = Pr.unsafeMake<never, RM.ReleaseMap>(None)
 
@@ -37,7 +55,7 @@ export function testRuntime<R, E>(
         T.bind("rm", () => RM.makeReleaseMap),
         T.tap(({ rm }) => pipe(promiseRelMap, Pr.succeed(rm))),
         T.bind("res", ({ rm }) =>
-          T.provideSome_(L.build(self).effect, (r: T.DefaultEnv) => tuple(r, rm))
+          T.provideSome_(L.build(layer).effect, (r: T.DefaultEnv) => tuple(r, rm))
         ),
         T.map(({ res }) => res[1]),
         T.result,

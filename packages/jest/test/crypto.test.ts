@@ -63,4 +63,14 @@ describe("Crypto Suite", () => {
         expect(Ex.untraced(verify)).toEqual(Ex.fail(new InvalidPassword()))
       }))
   })
+  describe("Empty", () => {
+    const { it } = testRuntime()
+
+    it("should use default env", () =>
+      T.gen(function* (_) {
+        const x = yield* _(T.effectTotal(() => 1))
+
+        expect(x).toEqual(1)
+      }))
+  })
 })
