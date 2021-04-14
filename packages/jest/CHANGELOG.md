@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.1](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.21.0...@effect-ts/jest@0.21.1) (2021-04-14)
+
+
+### Features
+
+* **jest:** add structural matcher ([077f8b4](https://github.com/Effect-TS/jest/commit/077f8b45470fb9e71b2e4d91c0b8737ebadaf8ef))
+
+
+
+
+
 # [0.21.0](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.20.0...@effect-ts/jest@0.21.0) (2021-04-12)
 
 **Note:** Version bump only for package @effect-ts/jest
