@@ -28,8 +28,12 @@
     "jest": ">= 26.4.2"
   },
   "config": {
+    "side": [
+      "Extend"
+    ],
     "modules": [
-      "Runtime"
+      "Runtime",
+      "Extend"
     ]
   }
 }
