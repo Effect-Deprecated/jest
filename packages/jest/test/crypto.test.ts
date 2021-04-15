@@ -68,7 +68,7 @@ describe("Crypto Suite", () => {
 
     it("should use default env", () =>
       T.gen(function* (_) {
-        const x = yield* _(T.effectTotal(() => 1))
+        const x = yield* _(T.succeedWith(() => 1))
 
         expect(x).toEqual(1)
       }))
