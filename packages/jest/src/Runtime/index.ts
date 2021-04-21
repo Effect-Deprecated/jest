@@ -1,11 +1,12 @@
 // tracing: off
 
+import * as Tp from "@effect-ts/core/Collections/Immutable/Tuple"
 import * as T from "@effect-ts/core/Effect"
 import * as Ex from "@effect-ts/core/Effect/Exit"
 import * as L from "@effect-ts/core/Effect/Layer"
 import * as RM from "@effect-ts/core/Effect/Managed/ReleaseMap"
 import * as Pr from "@effect-ts/core/Effect/Promise"
-import { pipe, tuple } from "@effect-ts/core/Function"
+import { pipe } from "@effect-ts/core/Function"
 import { None } from "@effect-ts/system/Fiber"
 
 export interface TestRuntime<R> {
@@ -55,9 +56,9 @@ export function testRuntime<R, E>(
         T.bind("rm", () => RM.makeReleaseMap),
         T.tap(({ rm }) => pipe(promiseRelMap, Pr.succeed(rm))),
         T.bind("res", ({ rm }) =>
-          T.provideSome_(L.build(layer).effect, (r: T.DefaultEnv) => tuple(r, rm))
+          T.provideSome_(L.build(layer).effect, (r: T.DefaultEnv) => Tp.tuple(r, rm))
         ),
-        T.map(({ res }) => res[1]),
+        T.map(({ res }) => res.get(1)),
         T.result,
         T.chain((ex) => pipe(promiseEnv, Pr.complete(T.orDie(T.done(ex))))),
         T.runPromise
