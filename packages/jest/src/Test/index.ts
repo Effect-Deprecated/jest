@@ -153,6 +153,8 @@ export function setTime(ms: number) {
 
 export const sleeps = T.accessServiceM(TestClock.TestClock)((_) => _.sleeps)
 
+export const saveClock = T.accessServiceM(TestClock.TestClock)((_) => _.save)
+
 export function live<E, A>(
   effect: T.Effect<T.DefaultEnv, E, A>
 ): T.Effect<Has<Live.Live>, E, A> {
