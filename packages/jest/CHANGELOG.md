@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.26.2](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.26.1...@effect-ts/jest@0.26.2) (2021-05-11)
+
+
+### Features
+
+* **jest:** improve api ([5906c69](https://github.com/Effect-TS/jest/commit/5906c696083985bb9c37e067c5b23424e154d166))
+
+
+
+
+
 ## [0.26.1](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.26.0...@effect-ts/jest@0.26.1) (2021-05-11)
 
 
