@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.25.2...@effect-ts/jest@0.26.0) (2021-05-11)
+
+
+### Features
+
+* **jest:** integrates with the new test env ([523f21e](https://github.com/Effect-TS/jest/commit/523f21efa390c45cebd251d047a5340ac02ef607))
+
+
+
+
+
 ## [0.25.2](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.25.1...@effect-ts/jest@0.25.2) (2021-05-10)
 
 **Note:** Version bump only for package @effect-ts/jest
