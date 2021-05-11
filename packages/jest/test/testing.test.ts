@@ -22,7 +22,7 @@ describe("Testing", () => {
       expect(result).toEqual(E.right(void 0))
     }))
 
-  it("time", () =>
+  it("time live", () =>
     T.gen(function* (_) {
       const fiber = yield* _(T.fork(T.sleep(1_000)))
 
