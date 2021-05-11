@@ -10,9 +10,11 @@ import * as Te from "../src/Test"
 import { Crypto, CryptoLive, PBKDF2ConfigTest } from "./crypto"
 
 describe("Testing", () => {
-  const { it, layer: Core } = Te.runtime()
+  const { it, layer: CoreEnv } = Te.runtime((TestEnv) =>
+    TestEnv["+++"](PBKDF2ConfigTest)
+  )
 
-  const crypto = Te.shared(Core[">+>"](PBKDF2ConfigTest[">+>"](CryptoLive)))
+  const { layer: CryptoEnv } = Te.shared(CoreEnv[">>>"](CryptoLive))
 
   it("time", () =>
     T.gen(function* (_) {
@@ -63,5 +65,5 @@ describe("Testing", () => {
       const verify = yield* _(T.result(verifyPassword(password, hash)))
 
       expect(Ex.untraced(verify)).toEqual(Ex.unit)
-    })["|>"](crypto.provide))
+    })["|>"](CryptoEnv.use))
 })
