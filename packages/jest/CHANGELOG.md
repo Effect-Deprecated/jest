@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.26.1](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.26.0...@effect-ts/jest@0.26.1) (2021-05-11)
+
+
+### Features
+
+* **jest:** expose saveClock ([c9e2617](https://github.com/Effect-TS/jest/commit/c9e26178d1e4277b7559e1bc61932ffe39b1b62d))
+
+
+
+
+
 # [0.26.0](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.25.2...@effect-ts/jest@0.26.0) (2021-05-11)
 
 
