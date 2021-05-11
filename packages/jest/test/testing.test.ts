@@ -10,11 +10,9 @@ import * as Te from "../src/Test"
 import { Crypto, CryptoLive, PBKDF2ConfigTest } from "./crypto"
 
 describe("Testing", () => {
-  const { it, layer: CoreEnv } = Te.runtime((TestEnv) =>
-    TestEnv["+++"](PBKDF2ConfigTest)
-  )
+  const { it } = Te.runtime()
 
-  const { layer: CryptoEnv } = Te.shared(CoreEnv[">>>"](CryptoLive))
+  const CryptoEnv = Te.shared(PBKDF2ConfigTest[">>>"](CryptoLive))
 
   it("time", () =>
     T.gen(function* (_) {

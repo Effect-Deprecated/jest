@@ -126,21 +126,13 @@ export function runtime<E, R>(
   }
 }
 
-export interface SharedLayer<E, R> {
-  layer: L.Layer<unknown, E, R>
-  provide: <R2, E1, A1>(self: T.Effect<R & R2, E1, A1>) => T.Effect<R2, E | E1, A1>
-}
-
-export function shared<E, R>(layer: L.Layer<unknown, E, R>): SharedLayer<E, R> {
+export function shared<E, R>(layer: L.Layer<unknown, E, R>): L.Layer<unknown, E, R> {
   const { allocate, provide, release } = unsafeMainProvider(layer)
 
   beforeAll(() => T.runPromise(allocate))
   afterAll(() => T.runPromise(release))
 
-  return {
-    layer: L.fromRawEffect(provide(T.environment<R>())),
-    provide
-  }
+  return L.fromRawEffect(provide(T.environment<R>()))
 }
 
 export function adjust(ms: number) {
