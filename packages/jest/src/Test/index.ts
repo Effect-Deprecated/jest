@@ -69,25 +69,13 @@ export class TestRuntime<R, E> {
       self: T.Effect<R & TestEnvironment, E1, A1>
     ) => T.Effect<R2, E | E1, A1>
   ) {}
-
-  readonly aspect = (
-    f: <E, A>(
-      _: T.Effect<R & TestEnvironment, E, A>
-    ) => T.Effect<R & TestEnvironment, E, A>
-  ): TestRuntime<R, E> =>
-    new TestRuntime(
-      (name, self) => this.it(name, () => f(self())),
-      this.layer,
-      this.provide
-    )
 }
 
-export function perTest<R1 extends R0, R0, E0>(
-  f: <E, A>(_: T.Effect<R0, E, A>) => T.Effect<R0, E, A>
+export function perTest<R1, E0>(
+  f: <R, E, A>(_: T.Effect<R, E, A>) => T.Effect<R & R1, E, A>
 ) {
   return (_: TestRuntime<R1, E0>): TestRuntime<R1, E0> =>
-    // @ts-expect-error
-    _.aspect(f)
+    new TestRuntime((name, self) => _.it(name, () => f(self())), _.layer, _.provide)
 }
 
 export function runtime(): TestRuntime<TestEnvironment, never>
