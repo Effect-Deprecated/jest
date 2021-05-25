@@ -58,41 +58,44 @@ export type TestEnvironment = Has<Annotations.Annotations> &
   Has<TestClock.TestClock> &
   Has<Random.Random>
 
-export interface TestRuntime<R, E> {
-  it: <E, A>(
-    name: string,
-    self: () => T.Effect<R & Has<Annotations.Annotations> & Has<Clock>, E, A>
-  ) => void
+export class TestRuntime<R, E> {
+  constructor(
+    readonly it: <E, A>(
+      name: string,
+      self: () => T.Effect<R & TestEnvironment, E, A>
+    ) => void,
+    readonly layer: L.Layer<unknown, E, R & TestEnvironment>,
+    readonly provide: <R2, E1, A1>(
+      self: T.Effect<R & TestEnvironment, E1, A1>
+    ) => T.Effect<R2, E | E1, A1>
+  ) {}
 
-  layer: L.Layer<unknown, E, R & Has<Annotations.Annotations> & Has<Clock>>
+  readonly aspect = (
+    f: <E, A>(
+      _: T.Effect<R & TestEnvironment, E, A>
+    ) => T.Effect<R & TestEnvironment, E, A>
+  ): TestRuntime<R, E> =>
+    new TestRuntime(
+      (name, self) => this.it(name, () => f(self())),
+      this.layer,
+      this.provide
+    )
+}
 
-  provide: <R2, E1, A1>(
-    self: T.Effect<
-      R & Has<Annotations.Annotations> & Has<Clock> & R2 & Has<Random.Random>,
-      E1,
-      A1
-    >
-  ) => T.Effect<R2, E | E1, A1>
+export function perTest<R1 extends R0, R0, E0>(
+  f: <E, A>(_: T.Effect<R0, E, A>) => T.Effect<R0, E, A>
+) {
+  return (_: TestRuntime<R1, E0>): TestRuntime<R1, E0> =>
+    // @ts-expect-error
+    _.aspect(f)
 }
 
 export function runtime(): TestRuntime<TestEnvironment, never>
 export function runtime<E, R>(
-  f: (
-    _: typeof TE.TestEnvironment
-  ) => L.Layer<
-    unknown,
-    E,
-    R & Has<Annotations.Annotations> & Has<Clock> & Has<Random.Random>
-  >
+  f: (_: typeof TE.TestEnvironment) => L.Layer<unknown, E, R & TestEnvironment>
 ): TestRuntime<R, E>
 export function runtime<E, R>(
-  f?: (
-    _: typeof TE.TestEnvironment
-  ) => L.Layer<
-    unknown,
-    E,
-    R & Has<Annotations.Annotations> & Has<Clock> & Has<Random.Random>
-  >
+  f?: (_: typeof TE.TestEnvironment) => L.Layer<unknown, E, R & TestEnvironment>
 ): TestRuntime<R, E> {
   const { allocate, provide, release } = unsafeMainProvider(
     // @ts-expect-error
@@ -102,28 +105,15 @@ export function runtime<E, R>(
   beforeAll(() => T.runPromise(allocate))
   afterAll(() => T.runPromise(release))
 
-  const it_ = <E, A>(
-    name: string,
-    self: () => T.Effect<
-      R & Has<Annotations.Annotations> & Has<Clock> & Has<Random.Random>,
-      E,
-      A
-    >
-  ) => {
+  const it_ = <E, A>(name: string, self: () => T.Effect<R & TestEnvironment, E, A>) => {
     it(name, () => T.runPromise(provide(FibersPerTest.fibersPerTest(self()))))
   }
 
-  return {
-    it: it_,
-    layer: L.fromRawEffect(
-      provide(
-        T.environment<
-          R & Has<Annotations.Annotations> & Has<Clock> & Has<Random.Random>
-        >()
-      )
-    ),
+  return new TestRuntime(
+    it_,
+    L.fromRawEffect(provide(T.environment<R & TestEnvironment>())),
     provide
-  }
+  )
 }
 
 export function shared<E, R>(layer: L.Layer<unknown, E, R>): L.Layer<unknown, E, R> {
