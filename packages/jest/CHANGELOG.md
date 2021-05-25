@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.1](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.27.0...@effect-ts/jest@0.27.1) (2021-05-25)
+
+
+### Features
+
+* **jest:** add perTest aspect ([6efe0e7](https://github.com/Effect-TS/jest/commit/6efe0e741b90ef6572bce9db64b5d439ce3592d9))
+
+
+
+
+
 # [0.27.0](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.26.2...@effect-ts/jest@0.27.0) (2021-05-23)
 
 **Note:** Version bump only for package @effect-ts/jest
