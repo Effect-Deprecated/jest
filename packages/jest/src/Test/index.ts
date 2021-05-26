@@ -90,8 +90,8 @@ export function runtime<E, R>(
     (f || identity)(TE.TestEnvironment)
   )
 
-  beforeAll(() => T.runPromise(allocate))
-  afterAll(() => T.runPromise(release))
+  beforeAll(() => T.runPromise(allocate), 60_000)
+  afterAll(() => T.runPromise(release), 60_000)
 
   const it_ = <E, A>(name: string, self: () => T.Effect<R & TestEnvironment, E, A>) => {
     it(name, () => T.runPromise(provide(FibersPerTest.fibersPerTest(self()))))
