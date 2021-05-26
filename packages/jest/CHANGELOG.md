@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.3](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.27.2...@effect-ts/jest@0.27.3) (2021-05-26)
+
+
+### Features
+
+* **test:** timeouts ([38059e2](https://github.com/Effect-TS/jest/commit/38059e238ff559c9d373a2815483de5dc5d0e780))
+
+
+
+
+
 ## [0.27.2](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.27.1...@effect-ts/jest@0.27.2) (2021-05-25)
 
 
