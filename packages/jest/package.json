@@ -24,8 +24,8 @@
   },
   "sideEffects": false,
   "peerDependencies": {
-    "@effect-ts/core": "^0.39.3",
-    "jest": ">= 26.4.2"
+    "@effect-ts/core": "^0.40.0",
+    "jest": ">= 27.0.3"
   },
   "config": {
     "side": [
