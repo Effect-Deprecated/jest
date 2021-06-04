@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.28.1](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.28.0...@effect-ts/jest@0.28.1) (2021-06-04)
+
+
+### Features
+
+* **test:** expose default env ([34c9111](https://github.com/Effect-TS/jest/commit/34c911151f8f7fb1625343874a66395b3a749732))
+
+
+
+
+
 # [0.28.0](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.27.3...@effect-ts/jest@0.28.0) (2021-05-30)
 
 **Note:** Version bump only for package @effect-ts/jest
