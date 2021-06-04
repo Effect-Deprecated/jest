@@ -93,7 +93,7 @@ export function runtime<E, R>(
 ): TestRuntime<R, E> {
   const { allocate, provide, release } = unsafeMainProvider(
     // @ts-expect-error
-    (f || identity)(TE.TestEnvironment, L.fromRawEffect(T.defaultEnv))
+    (f || identity)(TE.TestEnvironment, L.fromRawEffect(T.succeed(T.defaultEnv)))
   )
 
   beforeAll(() => T.runPromise(allocate), 60_000)
