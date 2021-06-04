@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.28.2](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.28.1...@effect-ts/jest@0.28.2) (2021-06-04)
+
+
+### Bug Fixes
+
+* **test:** fix ([125d871](https://github.com/Effect-TS/jest/commit/125d8711ab06b8d449f3fecad967fcf444303c43))
+
+
+
+
+
 ## [0.28.1](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.28.0...@effect-ts/jest@0.28.1) (2021-06-04)
 
 
