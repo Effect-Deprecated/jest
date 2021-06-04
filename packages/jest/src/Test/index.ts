@@ -1,20 +1,11 @@
-import * as Tp from "@effect-ts/core/Collections/Immutable/Tuple"
 import * as T from "@effect-ts/core/Effect"
 import type { Clock } from "@effect-ts/core/Effect/Clock"
-import * as Ex from "@effect-ts/core/Effect/Exit"
 import * as F from "@effect-ts/core/Effect/Fiber"
 import * as L from "@effect-ts/core/Effect/Layer"
-import type { State } from "@effect-ts/core/Effect/Managed/ReleaseMap"
-import {
-  releaseAll,
-  ReleaseMap,
-  Running
-} from "@effect-ts/core/Effect/Managed/ReleaseMap"
 import * as P from "@effect-ts/core/Effect/Promise"
 import type * as Random from "@effect-ts/core/Effect/Random"
-import * as Ref from "@effect-ts/core/Effect/Ref"
 import type { Has } from "@effect-ts/core/Has"
-import { identity } from "@effect-ts/system/Function"
+import { identity, pipe } from "@effect-ts/system/Function"
 import type * as Annotations from "@effect-ts/system/Testing/Annotations"
 import * as FibersPerTest from "@effect-ts/system/Testing/FibersPerTest"
 import * as Live from "@effect-ts/system/Testing/Live"
@@ -33,21 +24,27 @@ class MainProvider<R1, E, R> {
 
 function unsafeMainProvider<R1, E, R>(self: L.Layer<R1, E, R>) {
   const promise = P.unsafeMake<E, R>(F.None)
-  const relMap = new ReleaseMap(Ref.unsafeMakeRef<State>(new Running(0, new Map())))
+  const fref = {}
 
   return new MainProvider<R1, E, R>(
-    T.map_(
-      T.provideSome_(L.build(self).effect, (r: R1) => Tp.tuple(r, relMap)),
-      (_) => _.get(1)
-    )["|>"](
-      T.foldCauseM(
-        (cause) => P.halt_(promise, cause)["|>"](T.chain(() => T.halt(cause))),
-        (r) => P.succeed(r)(promise)
+    T.gen(function* (_) {
+      const x = yield* _(
+        T.forkDaemon(
+          pipe(
+            T.accessM((_: R) => P.succeed(_)(promise)),
+            T.zipRight(T.never),
+            T.provideSomeLayer(self),
+            T.catchAllCause((c) => P.halt_(promise, c))
+          )
+        )
       )
-    ),
-    T.descriptorWith((d) =>
-      releaseAll(Ex.interrupt(d.id), T.sequential)(relMap)["|>"](T.asUnit)
-    ),
+      fref["fiber"] = x
+      yield* _(P.await(promise))
+      return true
+    }),
+    T.suspend(() => {
+      return F.interrupt(fref["fiber"])
+    }),
     (self) => T.chain_(P.await(promise), (env) => T.provide(env)(self))
   )
 }
