@@ -80,14 +80,20 @@ export function perTest<R1, E0>(
 
 export function runtime(): TestRuntime<TestEnvironment, never>
 export function runtime<E, R>(
-  f: (_: typeof TE.TestEnvironment) => L.Layer<unknown, E, R & TestEnvironment>
+  f: (
+    _: typeof TE.TestEnvironment,
+    __: L.Layer<unknown, never, T.DefaultEnv>
+  ) => L.Layer<unknown, E, R & TestEnvironment>
 ): TestRuntime<R, E>
 export function runtime<E, R>(
-  f?: (_: typeof TE.TestEnvironment) => L.Layer<unknown, E, R & TestEnvironment>
+  f?: (
+    _: typeof TE.TestEnvironment,
+    __: L.Layer<unknown, never, T.DefaultEnv>
+  ) => L.Layer<unknown, E, R & TestEnvironment>
 ): TestRuntime<R, E> {
   const { allocate, provide, release } = unsafeMainProvider(
     // @ts-expect-error
-    (f || identity)(TE.TestEnvironment)
+    (f || identity)(TE.TestEnvironment, L.fromRawEffect(T.defaultEnv))
   )
 
   beforeAll(() => T.runPromise(allocate), 60_000)
