@@ -22,9 +22,10 @@ class MainProvider<R1, E, R> {
   ) {}
 }
 
+const finalizers: T.UIO<any>[] = []
+
 function unsafeMainProvider<R1, E, R>(self: L.Layer<R1, E, R>) {
   const promise = P.unsafeMake<E, R>(F.None)
-  const fref = {}
 
   return new MainProvider<R1, E, R>(
     T.gen(function* (_) {
@@ -38,12 +39,13 @@ function unsafeMainProvider<R1, E, R>(self: L.Layer<R1, E, R>) {
           )
         )
       )
-      fref["fiber"] = x
+      finalizers.push(F.interrupt(x))
       yield* _(P.await(promise))
       return true
     }),
     T.suspend(() => {
-      return F.interrupt(fref["fiber"])
+      const all = finalizers.splice(0)
+      return T.forEach_(all.reverse(), identity)
     }),
     (self) => T.chain_(P.await(promise), (env) => T.provide(env)(self))
   )
