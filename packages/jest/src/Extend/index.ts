@@ -1,3 +1,5 @@
+// ets_tracing: off
+
 import { equals } from "@effect-ts/system/Structural"
 import * as U from "jest-matcher-utils"
 

@@ -1,3 +1,5 @@
+// ets_tracing: off
+
 import * as T from "@effect-ts/core/Effect"
 import type { Clock } from "@effect-ts/core/Effect/Clock"
 import * as F from "@effect-ts/core/Effect/Fiber"
