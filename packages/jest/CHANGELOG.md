@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.1](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.30.0...@effect-ts/jest@0.30.1) (2021-10-04)
+
+**Note:** Version bump only for package @effect-ts/jest
+
+
+
+
+
 # [0.30.0](https://github.com/Effect-TS/jest/compare/@effect-ts/jest@0.29.0...@effect-ts/jest@0.30.0) (2021-09-14)
 
 **Note:** Version bump only for package @effect-ts/jest
