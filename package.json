@@ -35,7 +35,7 @@
     "@effect-ts/build-utils": "^0.25.0",
     "@effect-ts/core": "^0.45.0",
     "@effect-ts/system": "^0.42.0",
-    "@effect-ts/tracing-plugin": "^0.14.14",
+    "@effect-ts/tracing-plugin": "^0.15.0",
     "@types/cpx": "^1.5.2",
     "@types/glob": "^7.1.4",
     "@types/jest": "^27.0.2",
