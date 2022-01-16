@@ -514,7 +514,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@effect-ts/jest@workspace:packages/jest"
   peerDependencies:
-    "@effect-ts/core": ^0.50.0
+    "@effect-ts/core": ^0.52.0
     jest: ">= 27.0.3"
   languageName: unknown
   linkType: soft
