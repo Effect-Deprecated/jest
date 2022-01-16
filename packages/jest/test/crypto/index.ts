@@ -2,6 +2,7 @@ import * as T from "@effect-ts/core/Effect"
 import * as L from "@effect-ts/core/Effect/Layer"
 import { pipe } from "@effect-ts/core/Function"
 import { tag } from "@effect-ts/core/Has"
+import type { _A } from "@effect-ts/system/Utils"
 import * as crypto from "crypto"
 
 // larger numbers mean better security, less
@@ -40,7 +41,7 @@ export class InvalidPassword {
   readonly _tag = "InvalidPassword"
 }
 
-export function makeCrypto(config: PBKDF2Config) {
+export const makeCrypto = T.accessService(PBKDF2Config)((config: PBKDF2Config) => {
   return {
     hashPassword: (password: string) =>
       T.effectAsync<unknown, never, string>((cb) => {
@@ -113,10 +114,10 @@ export function makeCrypto(config: PBKDF2Config) {
         )
       })
   }
-}
+})
 
-export interface Crypto extends ReturnType<typeof makeCrypto> {}
+export interface Crypto extends _A<typeof makeCrypto> {}
 
 export const Crypto = tag<Crypto>()
 
-export const CryptoLive = L.fromConstructor(Crypto)(makeCrypto)(PBKDF2Config)
+export const CryptoLive = L.fromEffect(Crypto)(makeCrypto)

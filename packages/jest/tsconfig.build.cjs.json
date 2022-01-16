@@ -1,11 +1,11 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "build/esm",
-    "module": "ES6",
+    "outDir": "build/cjs",
     "target": "ES2018",
+    "module": "CommonJS",
     "incremental": true,
-    "tsBuildInfoFile": "tsbuildinfo/es6.tsbuildinfo",
+    "tsBuildInfoFile": "tsbuildinfo/build.tsbuildinfo",
     "removeComments": false,
     "plugins": [
       {
@@ -16,6 +16,11 @@
       }
     ]
   },
-  "include": ["src/**/*"],
-  "exclude": ["test", "node_modules"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "test",
+    "node_modules"
+  ]
 }
