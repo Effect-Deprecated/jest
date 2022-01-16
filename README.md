@@ -1,4 +1,4 @@
-## Welcome to Effect-TS - Jest
+## Welcome to Effect-TS - Jest [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/Effect-TS/jest)
 
 Please follow up to: [https://github.com/Effect-TS/jest/tree/master/packages/jest](https://github.com/Effect-TS/jest/tree/master/packages/jest)
 
