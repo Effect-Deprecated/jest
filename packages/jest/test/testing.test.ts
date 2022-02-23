@@ -6,8 +6,8 @@ import * as Sc from "@effect-ts/core/Effect/Schedule"
 import * as E from "@effect-ts/core/Either"
 import { pipe } from "@effect-ts/core/Function"
 
-import * as Te from "../src/Test"
-import { Crypto, CryptoLive, PBKDF2ConfigTest } from "./crypto"
+import * as Te from "../src/Test/index.js"
+import { Crypto, CryptoLive, PBKDF2ConfigTest } from "./crypto/index.js"
 
 describe("Testing", () => {
   const { it } = Te.runtime()

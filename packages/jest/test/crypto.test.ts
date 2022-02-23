@@ -1,14 +1,14 @@
 import * as T from "@effect-ts/core/Effect"
 import * as Ex from "@effect-ts/core/Effect/Exit"
 
-import { testRuntime } from "../src/Runtime"
+import { testRuntime } from "../src/Runtime/index.js"
 import {
   Crypto,
   CryptoLive,
   InvalidPassword,
   PBKDF2ConfigLive,
   PBKDF2ConfigTest
-} from "./crypto"
+} from "./crypto/index.js"
 
 describe("Crypto Suite", () => {
   describe("Live", () => {
