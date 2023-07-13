@@ -4453,13 +4453,13 @@ __metadata:
   linkType: hard
 
 "eslint-plugin-sort-destructure-keys@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "eslint-plugin-sort-destructure-keys@npm:1.4.0"
+  version: 1.5.0
+  resolution: "eslint-plugin-sort-destructure-keys@npm:1.5.0"
   dependencies:
     natural-compare-lite: ^1.4.0
   peerDependencies:
     eslint: 3 - 8
-  checksum: 6ff004c1eb59f9902f5f64d8453c45ba550b8894450401c496da80eed0058cd52b9ad8a43a485f2638f5601c5d4a965a96d2f72a5f1d6d0f5255a26b4df6fe8f
+  checksum: dafa189d79f6de7c32ae4e100b4d7e40dddf0eee33bd270c78eb8c9b8b81aa48245832d2a891de48c5f0dad8b2bd06b63b1a7994d4b6d8b69f1559351b10e1c0
   languageName: node
   linkType: hard
 
